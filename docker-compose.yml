@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  assignment:
+    image: assignment
+    environment:
+      FLASK_APP: assignment
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 5000:5000
+    depends_on:
+      - mongodb
+  mongodb:
+    environment:
+      MONGO_INITDB_DATABASE: assignment
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_ROOT_USERNAME: admin
+    image: mongo:4.4.11
+    ports:
+      - "27017:27017"
+    restart: always
+    volumes:
+      - ./mongo/data:/data/db
