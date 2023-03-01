@@ -53,7 +53,6 @@ class TestEmployeeService:
         employee_service = EmployeeService()
         output = employee_service.get_employees_and_common_friends("1", "2")
 
-        print(output)
         assert output == {
             "employee_details": {
                 "1": {

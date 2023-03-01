@@ -38,5 +38,4 @@ class CompanyAccessLayer:
         Returns:
             list[Company]: A list of all the company objects in the database.
         """
-        print(f"----------------------{list(Company.objects())}")
         return list(Company.objects())

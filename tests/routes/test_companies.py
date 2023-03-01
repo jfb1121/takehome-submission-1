@@ -38,7 +38,6 @@ class TestCompanies:
         ).save()
 
         res = client.get(f"{self.BASE_URL}1/employees")
-        print(res.data)
         assert res.json["employees"] == ["1", "2"]
 
         tear_downdb()
