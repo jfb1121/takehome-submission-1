@@ -19,7 +19,9 @@ def get_common_friends():
     """
     emp1_id = request.args.get("emp1_id", "")
     emp2_id = request.args.get("emp2_id", "")
-    data = EmployeeService().get_employees_and_common_friends(employee_id=emp1_id, employee_2_id=emp2_id)
+    data = EmployeeService().get_employees_and_common_friends(
+        employee_id=emp1_id, employee_2_id=emp2_id
+    )
     return data, 200
 
 

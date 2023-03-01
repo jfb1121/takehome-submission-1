@@ -51,6 +51,7 @@ The system is divided into 3 layers:
 * Service layer: complex business logic goes here, although there were not a lot
 * I/O layer: Abstracts away any database or other form of I/O from the rest of the system.
   * This allows us to change the database / models while maintaining the same interface to the service layer
+* Ideally there would be a lot more logging in the application, but since it's only a take home assignment, it's not been showcased here.
 
 
 ### Prerequisites

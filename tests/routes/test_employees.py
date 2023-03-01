@@ -4,6 +4,7 @@ from buddywise.models.employee import Employee
 
 class TestEmployees:
     BASE_URL = "/employee"
+
     def test_get_common_friends(self, client, db, tear_downdb):
         emp_1 = Employee(
             guid="1",
@@ -33,15 +34,14 @@ class TestEmployees:
             phone="1112223333",
             address="789 Oak St",
             eye_color="brown",
-            has_died=False
+            has_died=False,
         ).save()
 
-        query_string = {
-            "emp1_id": 1,
-            "emp2_id": 2
-        }
+        query_string = {"emp1_id": 1, "emp2_id": 2}
 
-        res = client.get(f"{self.BASE_URL}/get-common-friends", query_string=query_string)
+        res = client.get(
+            f"{self.BASE_URL}/get-common-friends", query_string=query_string
+        )
         assert res.json == {
             "employee_details": {
                 "1": {
@@ -62,7 +62,7 @@ class TestEmployees:
 
         tear_downdb()
 
-    def test_get_employee_details(self,client, db, tear_downdb):
+    def test_get_employee_details(self, client, db, tear_downdb):
         emp_1 = Employee(
             guid="1",
             has_died=False,
@@ -72,10 +72,9 @@ class TestEmployees:
             address="123 Main St",
             phone="1234567890",
             name="John",
-            favourite_food=["apple", "banana", "carrot"]
+            favourite_food=["apple", "banana", "carrot"],
         ).save()
-        Company(guid="1",
-                name="foo").save()
+        Company(guid="1", name="foo").save()
         res = client.get(f"{self.BASE_URL}/1")
         assert res.json == {
             "name": "John",
@@ -84,4 +83,3 @@ class TestEmployees:
             "fruits": ["apple", "banana"],
             "vegetables": ["carrot"],
         }
-
