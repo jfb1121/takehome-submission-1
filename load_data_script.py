@@ -2,6 +2,7 @@ import json
 from typing import Any, Dict
 from uuid import uuid4
 
+from dateutil import parser
 from mongoengine import connect
 
 from buddywise.models.company import Company
@@ -48,6 +49,7 @@ def load_employee_data(company_index_id: dict):
         )  # index 100 doesn't exist in company.
         emp["eye_color"] = emp.pop("eyeColor")
         emp["favourite_food"] = emp.pop("favouriteFood")
+        emp["registered"] = parser.parse(emp["registered"])
         emp.pop("picture")
         emp.pop("index")
         emp.pop("_id")
