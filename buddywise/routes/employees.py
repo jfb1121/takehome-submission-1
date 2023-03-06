@@ -1,5 +1,6 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, abort, make_response, jsonify
 
+from buddywise.exceptions import AccessLayerException
 from buddywise.services.employee_service import EmployeeService
 
 employee_urls = Blueprint("employees_urls", __name__, url_prefix="/employee")
@@ -36,6 +37,9 @@ def get_employee_details(employee_id: str):
     Returns:
         dict: A dictionary containing the employee details.
     """
-    data = EmployeeService().get_employee_details(employee_id=employee_id)
+    try:
+        data = EmployeeService().get_employee_details(employee_id=employee_id)
+        return data, 200
+    except AccessLayerException:
+        abort(make_response(jsonify(success=False, message="not found"), 404))
 
-    return data, 200

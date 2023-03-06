@@ -56,6 +56,14 @@ def load_employee_data(company_index_id: dict):
         Employee(**emp).save()
 
 
+def clean_data_base():
+    try:
+        Employee.objects().delete()
+        Company.objects().delete()
+    except Exception:
+        pass
+
+
 if __name__ == "__main__":
     # ideally should come from config / env variables.
     connect(
@@ -65,5 +73,6 @@ if __name__ == "__main__":
         username="admin",
         password="password",
     )
+    clean_data_base()
     guid_index_map = load_company_data()
     load_employee_data(guid_index_map)
